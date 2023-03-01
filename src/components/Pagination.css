@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+
+.pgn {
+  width: 100%;
+  background-color: rgb(26, 26, 39);
+  border-radius: 10px;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 0 25px 0 rgb(0 0 0 / 4%);
+  justify-content: space-between;
+}
+.page{
+  width: 50px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  height: 30px;
+}
