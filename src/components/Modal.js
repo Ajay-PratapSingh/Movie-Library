@@ -4,10 +4,10 @@ const Modal = (props) => {
     return (
         <Fragment>
             <div className="backdrop" onClick={props.OnClose}></div>
-            <section className="modaloverlay">
+            <section className="modaloverlay" id="style-2">
                 <button onClick={props.OnClose}> close </button>
                 <section className="modal-poster">
-                <img src={`http://image.tmdb.org/t/p/w500/${props.poster}`} alt="poster" className="poster"></img>
+                <img src={`https://image.tmdb.org/t/p/original/${props.poster}`} alt="poster" className="poster"></img>
                 </section>
                 <section>
                     <h2 className="title">{props.title}</h2>
