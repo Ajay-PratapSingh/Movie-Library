@@ -4,7 +4,7 @@ import './Card.css';
 const Card=(props)=> {
 
     const detailHandler=()=>{
-        props.onOpenModal();
+        props.onOpenModal(props.Id);
     }
 
     return (

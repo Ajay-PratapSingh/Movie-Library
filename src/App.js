@@ -15,7 +15,11 @@ function App() {
   const [showModal, setModal] = useState(false);
 
   //modal states----------------
-  
+  const [modalTitle, setmodalTitle] = useState();
+  const [modalDescription, setmodalDescription] = useState();
+  const [modalPoster, setmodalPoster] = useState();
+  const [modalReleasedate, setmodalReleasedate] = useState();
+  const [modalRating, setmodalRating] = useState();
   //----------------------------------
 
   const searchResultHandler = (data) => {
@@ -30,22 +34,39 @@ function App() {
     const responsejson = await response.json();
     setMoviesarr(responsejson.results);
   }
+
   useEffect(() => {
     getMovieRequest();
   }, [])
 
-  const ShowModalHandler = () => {
+  const ShowModalHandler = async (Id) => {
+    const url=`https://api.themoviedb.org/3/movie/${Id}?api_key=${process.env.REACT_APP_API}`;
+    const response = await fetch(url);
+    const responsejson = await response.json();
+    console.log(responsejson);
+    setmodalTitle(responsejson.original_title);
+    setmodalDescription(responsejson.overview);
+    setmodalPoster(responsejson.backdrop_path);
+    setmodalRating(responsejson.vote_average);
+    setmodalReleasedate(responsejson.release_date);
     setModal(true);
   }
 
   const HideModalHandler = () => {
     setModal(false);
-    console.log("i ran")
   }
+
+  console.log(Moviesarr);
 
   return (
     <Fragment>
-        {showModal && <Modal OnClose={HideModalHandler}/>}
+        {showModal && <Modal OnClose={HideModalHandler} 
+            title= {modalTitle}
+            description = {modalDescription}
+            poster = {modalPoster}
+            rating = {modalRating}
+            releasedate= {modalReleasedate}
+        />}
 
         <article className='container'>
 
