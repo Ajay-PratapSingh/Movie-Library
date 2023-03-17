@@ -13,12 +13,11 @@ const SearchBar=(props)=>{
             return ;
         }
         const query=searchquery;
-        console.log(query);
+        props.sq(query);
         
         fetch(`https://api.themoviedb.org/3/search/movie?api_key=${props.api_key}&query=${query}`)
         .then(data=>data.json())
         .then(data=>{props.onsearch(data)})
-        console.log(query);
         setsearchquery('');
     };
 

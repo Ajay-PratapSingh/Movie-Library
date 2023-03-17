@@ -36,6 +36,8 @@
 }
 
 .list-area{
+  padding-top:15vh;
+  padding-bottom:6vh;
   display: flex;
   grid-row-start:2;
   flex-direction:row;

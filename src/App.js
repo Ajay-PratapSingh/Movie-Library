@@ -13,6 +13,7 @@ function App() {
   const [Moviesarr, setMoviesarr] = useState([]);
   const [pages, setPages] = useState('');
   const [showModal, setModal] = useState(false);
+  const [query,setQuery]=useState("");
 
   //modal states----------------
   const [modalTitle, setmodalTitle] = useState();
@@ -20,14 +21,14 @@ function App() {
   const [modalPoster, setmodalPoster] = useState();
   const [modalReleasedate, setmodalReleasedate] = useState();
   const [modalRating, setmodalRating] = useState();
-  //----------------------------------
+  //------------search----------------------
 
   const searchResultHandler = (data) => {
     console.log(data);
     setMoviesarr([...data.results]);
     setPages(data.total_pages);
   };
-
+  //-----------------------------------------------------
   const getMovieRequest = async () => {
     const url = `https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.REACT_APP_API}`
     const response = await fetch(url);
@@ -37,8 +38,22 @@ function App() {
 
   useEffect(() => {
     getMovieRequest();
-  }, [])
+  },[])
 
+  //------------pagination---------------------------------
+  const pageChangeHandler=async(page)=>{
+    var url;
+    if(query!==""){
+      url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_API}&query=${query}&page=${page}`
+    }
+    else{
+      url = `https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.REACT_APP_API}&page=${page}`
+    }
+    const response = await fetch(url);
+    const responsejson = await response.json();
+    setMoviesarr(responsejson.results);
+  }
+  //------------------------------------------------------------
   const ShowModalHandler = async (Id) => {
     const url=`https://api.themoviedb.org/3/movie/${Id}?api_key=${process.env.REACT_APP_API}`;
     const response = await fetch(url);
@@ -72,7 +87,7 @@ function App() {
 
           <section className='header-area'>
             <SearchBar api_key={process.env.REACT_APP_API}
-              onsearch={searchResultHandler}></SearchBar>
+              onsearch={searchResultHandler} sq={setQuery}></SearchBar>
           </section>
 
 
@@ -86,7 +101,7 @@ function App() {
             <Movies items={Moviesarr} onopenmodal={ShowModalHandler}/>
 
             <section className='pgn'>
-              <Pagination totalpages={pages}></Pagination>
+              <Pagination totalpages={pages} pageHandler={pageChangeHandler}></Pagination>
             </section>
 
           </article>

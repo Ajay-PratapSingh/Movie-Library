@@ -2,8 +2,10 @@
 
 
 .pgn {
-  width: 100%;
-  background-color: rgb(26, 26, 39);
+  position: fixed;
+  bottom: 0;
+  width:71%;
+  background-color: rgb(17, 17, 45);
   border-radius: 10px;
   min-height: 40px;
   display: flex;
