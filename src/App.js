@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import SearchBar from './components/SearchBar';
 import Movies from './components/Movies';
-import MovieFilter from './components/MovieFilter';
+//import MovieFilter from './components/MovieFilter';
 import Favourites from './components/Favourites';
 import Modal from './components/Modal';
 import './App.css';
@@ -53,7 +53,7 @@ function App() {
     const responsejson = await response.json();
     setMoviesarr(responsejson.results);
   }
-  //------------------------------------------------------------
+  //---------------------modal---------------------------------------
   const ShowModalHandler = async (Id) => {
     const url=`https://api.themoviedb.org/3/movie/${Id}?api_key=${process.env.REACT_APP_API}`;
     const response = await fetch(url);
@@ -92,7 +92,6 @@ function App() {
 
 
           <aside className='filter-area'>
-            <MovieFilter></MovieFilter>
             <Favourites></Favourites>
           </aside>
           <div><h1 className='h1'>Top Rated Movies</h1></div>
