@@ -92,7 +92,7 @@ function App() {
 
 
           <aside className='filter-area'>
-            <MovieFilter></MovieFilter>
+            //<MovieFilter></MovieFilter>
             <Favourites></Favourites>
           </aside>
           <div><h1 className='h1'>Top Rated Movies</h1></div>
