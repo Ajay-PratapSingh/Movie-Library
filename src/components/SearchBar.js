@@ -1,32 +1,40 @@
 import React, { useState } from 'react';
-import './Searchbar.css';
-const SearchBar=(props)=>{
-    const[searchquery,setsearchquery]=useState('');
+import { Form } from 'react-bootstrap';
 
-    const searchChangeHandler=(event)=>{
+const SearchBar = (props) => {
+    const [searchquery, setsearchquery] = useState('');
+
+    const handleChange = (event) => {
         setsearchquery(event.target.value);
     }
 
-    const searchHandler=(event)=>{
+    const searchHandler = (event) => {
         event.preventDefault();
-        if(searchquery===""){
-            return ;
+        if (searchquery === "") {
+            return;
         }
-        const query=searchquery;
+        const query = searchquery;
         props.sq(query);
-        
+
         fetch(`https://api.themoviedb.org/3/search/movie?api_key=${props.api_key}&query=${query}`)
-        .then(data=>data.json())
-        .then(data=>{props.onsearch(data)})
+            .then(data => data.json())
+            .then(data => { props.onsearch(data) })
         setsearchquery('');
     };
 
-    return(
+    return (
 
-        <form className='search-bar'>
-            <input type="text" placeholder="search" value={searchquery} onChange={searchChangeHandler}></input>
-            <button type="submit" onClick={searchHandler}></button>
-        </form>
+        <Form onSubmit={searchHandler}>
+            <Form.Group controlId="formBasicEmail">
+                <Form.Control
+                    type="text"
+                    placeholder="Search"
+                    value={searchquery}
+                    onChange={handleChange}
+                    style={{ minWidth:'350px'}}
+                />
+            </Form.Group>
+        </Form>
     )
 }
 export default SearchBar;

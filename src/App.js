@@ -1,11 +1,10 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import SearchBar from './components/SearchBar';
 import Movies from './components/Movies';
-//import MovieFilter from './components/MovieFilter';
 import Favourites from './components/Favourites';
-import Modal from './components/Modal';
-import './App.css';
-import Pagination from './components/Pagination';
+import MovieModal from './components/MovieModal';
+import MoviePagination from './components/MoviePagination';
+import "./App.css";
 
 
 function App() {
@@ -15,12 +14,6 @@ function App() {
   const [showModal, setModal] = useState(false);
   const [query,setQuery]=useState("");
 
-  //modal states----------------
-  const [modalTitle, setmodalTitle] = useState();
-  const [modalDescription, setmodalDescription] = useState();
-  const [modalPoster, setmodalPoster] = useState();
-  const [modalReleasedate, setmodalReleasedate] = useState();
-  const [modalRating, setmodalRating] = useState();
   //------------search----------------------
 
   const searchResultHandler = (data) => {
@@ -54,16 +47,7 @@ function App() {
     setMoviesarr(responsejson.results);
   }
   //---------------------modal---------------------------------------
-  const ShowModalHandler = async (Id) => {
-    const url=`https://api.themoviedb.org/3/movie/${Id}?api_key=${process.env.REACT_APP_API}`;
-    const response = await fetch(url);
-    const responsejson = await response.json();
-    console.log(responsejson);
-    setmodalTitle(responsejson.original_title);
-    setmodalDescription(responsejson.overview);
-    setmodalPoster(responsejson.backdrop_path);
-    setmodalRating(responsejson.vote_average);
-    setmodalReleasedate(responsejson.release_date);
+  const ShowModalHandler=() => {
     setModal(true);
   }
 
@@ -75,35 +59,25 @@ function App() {
 
   return (
     <Fragment>
-        {showModal && <Modal OnClose={HideModalHandler} 
-            title= {modalTitle}
-            description = {modalDescription}
-            poster = {modalPoster}
-            rating = {modalRating}
-            releasedate= {modalReleasedate}
-        />}
-
-        <article className='container'>
+        {showModal && <MovieModal OnClose={HideModalHandler}/>}
+        <article className='maincontainer'>
 
           <section className='header-area'>
             <SearchBar api_key={process.env.REACT_APP_API}
               onsearch={searchResultHandler} sq={setQuery}></SearchBar>
           </section>
-
-
-          <aside className='filter-area'>
-            <Favourites></Favourites>
-          </aside>
-          <div><h1 className='h1'>Top Rated Movies</h1></div>
-          <article className='list-area'>
-
+          <article className='list-area' >
+            
             <Movies items={Moviesarr} onopenmodal={ShowModalHandler}/>
-
-            <section className='pgn'>
-              <Pagination totalpages={pages} pageHandler={pageChangeHandler}></Pagination>
-            </section>
-
           </article>
+          <section className='pagination'>
+              <MoviePagination totalpages={pages} pageHandler={pageChangeHandler}></MoviePagination>
+          </section>
+          <aside className='favourite-area'>
+            <div className='favouritelist'>
+            <Favourites></Favourites>
+            </div>
+          </aside>
         </article>
     </Fragment>
   );

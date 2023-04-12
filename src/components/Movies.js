@@ -1,11 +1,11 @@
-import Card from "./Card";
 import React, { Fragment } from "react";
+import MovieCard from "../components/MovieCard";
 const Movies=(props)=>{
     const displayMovies= props.items;
     return(
     <Fragment>
         {displayMovies.length>0 && displayMovies.map((Moviesarr)=>
-        <Card
+        <MovieCard
         onOpenModal={props.onopenmodal}
         Id={Moviesarr.id}
         Title={Moviesarr.original_title}
