@@ -1,8 +1,7 @@
 <h1 align="center">React Movie-Library</h1>
  
  <p align="center"><br/>
- <p>DEMO</p>
-     <a href="https://ajays-movie-library.netlify.app/">
+  <a href="https://ajays-movie-library.netlify.app/"> DEMO
   </a>
  </p>
 
