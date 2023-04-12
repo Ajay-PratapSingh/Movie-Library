@@ -2,7 +2,6 @@ import React, { Fragment} from "react";
 import './MovieModal.css';
 import { useSelector } from "react-redux";
 const MovieModal = (props) => {
-    const movie_id = useSelector(state => state.modal.modalId);
     const title = useSelector(state => state.modal.modalTitle);
     const description = useSelector(state => state.modal.modalDescription);
     const releasedate = useSelector(state => state.modal.modalReleasedate);
