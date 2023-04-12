@@ -42,7 +42,7 @@ Install and run the app using the following steps:
 
 Clone the repository
 ```
-git clone https://github.com/paufar/movie-library.git
+git clone https://github.com/Ajay-PratapSingh/Movie-Library.git
 ```
 
 Navigate to the repository
